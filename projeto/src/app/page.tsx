@@ -224,7 +224,7 @@ export default function Home() {
                 ref={provided.innerRef}
                 {...provided.droppableProps}>
                 {tasks.map((task, index) => (
-                  <Task key={task.id} task={task} index={index}className={task.cost > 1000
+                  <Task key={task.id} task={task} index={index}className={task.cost >= 1000
                     ? "list-group-item d-flex justify-content-between align-items-center bg-red-900 text-white p-3"
                     : "list-group-item d-flex justify-content-between align-items-center bg-gray-800 text-white p-3"}>
                     <div>
