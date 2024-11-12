@@ -7,7 +7,7 @@ import Button from "../components/Button"
 
 export default function CreateTask() {
   const [name, setName] = useState("")
-  const [cost, setCost] = useState(0)
+  const [cost, setCost] = useState("")
   const [dateLimit, setDateLimit] = useState("")
   const [error, setError] = useState<string>("")
   const [loading, setLoading] = useState(false)
@@ -86,7 +86,7 @@ export default function CreateTask() {
               id="cost"
               className="form-control"
               value={cost}
-              onChange={(e) => setCost(Number(e.target.value))}
+              onChange={(e) => setCost((e.target.value))}
               required
             />
           </div>
