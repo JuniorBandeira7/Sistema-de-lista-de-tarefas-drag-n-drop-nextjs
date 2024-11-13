@@ -21,9 +21,15 @@ body {
 }
 
 .form-control {
-  cursor: text;
+  cursor: text !important;
+  z-index: 99999999999;
 }
 
-.bt5n {
-  cursor: pointer;
+.btn {
+  cursor: pointer !important;
+  z-index: 999999;
+}
+
+li {
+  cursor: grab !important;
 }

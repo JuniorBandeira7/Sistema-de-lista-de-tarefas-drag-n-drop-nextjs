@@ -187,6 +187,21 @@ export default function Home() {
         return
       }
 
+      if (editedTask.cost == undefined || Number.isNaN(editedTask.cost)) {
+        alert("Informe o custo!")
+        return
+      }
+
+      if (editedTask.cost > Number.MAX_SAFE_INTEGER) {
+        alert("Número de custo muito alto, por favor tente um número menor")
+        return
+      }
+
+      if (editedTask.cost < 0) {
+        alert("Informe valores positivos para o custo!")
+        return
+      }
+
       const response = await fetch(`/api/task/${taskId}`, {
         method: "PATCH",
         headers: {
@@ -245,7 +260,7 @@ export default function Home() {
                           <input
                             type="number"
                             name="cost"
-                            value={editedTask.cost || 0}
+                            value={editedTask.cost}
                             onChange={handleInputChange}
                             className="form-control mb-2"
                           />

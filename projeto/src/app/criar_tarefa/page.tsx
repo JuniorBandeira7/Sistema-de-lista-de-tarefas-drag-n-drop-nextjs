@@ -34,6 +34,11 @@ export default function CreateTask() {
         alert("Número de custo muito alto, por favor tente um número menor")
         return
       }
+
+      if (parseInt(cost) < 0) {
+        alert("Informe valores positivos para o custo!")
+        return
+      }
   
       const response = await fetch("/api/task", {
         method: "POST",
