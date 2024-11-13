@@ -182,6 +182,11 @@ export default function Home() {
         return
       }
 
+      if (editedTask.name == "") {
+        alert("O nome não pode ser vazio")
+        return
+      }
+
       const response = await fetch(`/api/task/${taskId}`, {
         method: "PATCH",
         headers: {
@@ -254,8 +259,9 @@ export default function Home() {
                         </>
                       ) : (
                         <>
+                          <p className="mb-1"><strong>Id: </strong>{task.id}</p>
                           <h2 className="mb-1"><strong>{task.name}</strong></h2>
-                          <p className="mb-1"><strong>Custo:</strong> R$ {Number(task.cost).toFixed(2)}</p>
+                          <p className="mb-1"><strong>Custo:</strong> R$ {Number(task.cost).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                           <p className="mb-1"><strong>Data Limite:</strong> {formatDate(task.dateLimit)}</p>
                         </>
                       )}

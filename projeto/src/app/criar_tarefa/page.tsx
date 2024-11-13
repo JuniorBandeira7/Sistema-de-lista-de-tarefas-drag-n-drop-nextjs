@@ -15,19 +15,26 @@ export default function CreateTask() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+  
     setLoading(true)
     setError("")
-
+  
     try {
       const token = localStorage.getItem("token")
       if (!token) {
         router.push("/login")
         return
       }
+  
+      // Extrai o ano, mês e dia da data e cria o objeto Date
+      const [year, month, day] = dateLimit.split("-")
+      const formattedDateLimit = new Date(Number(year), Number(month) - 1, Number(day)).toISOString()
 
-      const formattedDateLimit = new Date(dateLimit).toISOString()
-
+      if (parseInt(cost) > Number.MAX_SAFE_INTEGER) {
+        alert("Número de custo muito alto, por favor tente um número menor")
+        return
+      }
+  
       const response = await fetch("/api/task", {
         method: "POST",
         headers: {
@@ -40,17 +47,19 @@ export default function CreateTask() {
           dateLimit: formattedDateLimit,
         }),
       })
-
+  
       const data = await response.json()
       console.log(data)
-
+  
       if (response.ok) {
         alert("Tarefa criada com sucesso!")
         router.push("/")
       } else {
+        alert("Erro ao criar tarefa.")
         setError(data.message || "Erro ao criar tarefa.")
       }
     } catch (error) {
+      alert("Erro ao criar tarefa.")
       setError("Erro ao criar tarefa.")
       console.error(error)
     } finally {
@@ -71,7 +80,7 @@ export default function CreateTask() {
             <input
               type="text"
               id="name"
-              className="form-control"
+              className="form-control text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -84,7 +93,7 @@ export default function CreateTask() {
             <input
               type="number"
               id="cost"
-              className="form-control"
+              className="form-control text"
               value={cost}
               onChange={(e) => setCost((e.target.value))}
               required
@@ -97,7 +106,7 @@ export default function CreateTask() {
             <input
               type="date"
               id="dateLimit"
-              className="form-control"
+              className="form-control text"
               value={dateLimit}
               onChange={(e) => setDateLimit(e.target.value)}
               required
