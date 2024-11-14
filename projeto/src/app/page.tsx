@@ -4,7 +4,7 @@ import Button from './components/Button'
 import Link from 'next/link'
 import { DragDropContext, Droppable } from '@hello-pangea/dnd'
 import { Task } from "./components/Task"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from 'next/navigation'
 
 interface Task {
@@ -21,6 +21,7 @@ export default function Home() {
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null)
   const [editedTask, setEditedTask] = useState<Partial<Task>>({})
   const router = useRouter()
+  const nameInputRef = useRef<HTMLInputElement>(null)
 
   function reorder<T>(list: T[], startIndex: number, endIndex: number) {
     const result = Array.from(list)
@@ -145,6 +146,7 @@ export default function Home() {
     const taskToEdit = tasks.find(task => task.id === taskId)
     if (taskToEdit) {
       setEditedTask({ ...taskToEdit })
+      setTimeout(() => nameInputRef.current?.focus(), 0)
     }
   }
 
@@ -254,6 +256,7 @@ export default function Home() {
                             type="text"
                             name="name"
                             value={editedTask.name || ''}
+                            ref={nameInputRef}
                             onChange={handleInputChange}
                             className="form-control mb-2"
                           />

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import Header from "../components/Header"
 import Button from "../components/Button"
@@ -12,6 +12,11 @@ export default function CreateTask() {
   const [error, setError] = useState<string>("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const nameInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    nameInputRef.current?.focus()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -87,6 +92,7 @@ export default function CreateTask() {
               id="name"
               className="form-control text"
               value={name}
+              ref={nameInputRef}
               onChange={(e) => setName(e.target.value)}
               required
             />
