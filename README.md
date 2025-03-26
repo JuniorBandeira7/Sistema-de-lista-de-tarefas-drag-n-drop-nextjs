@@ -34,7 +34,6 @@ Um sistema simples de gerenciamento de tarefas desenvolvido com Next.js e Postgr
    ```
 
    - Substitua `<usuário>`, `<senha>`, `<host>`, `<porta>`, e `<nome_do_banco>` com as informações do seu banco de dados PostgreSQL.
-   - `JWT_SECRET`: Chave secreta usada para gerar e validar os tokens JWT.
 
 ## Inicializando a Aplicação
 
