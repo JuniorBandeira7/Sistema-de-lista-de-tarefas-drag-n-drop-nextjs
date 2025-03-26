@@ -31,7 +31,6 @@ Um sistema simples de gerenciamento de tarefas desenvolvido com Next.js e Postgr
 
    ```env
    DATABASE_URL=postgres://<usuário>:<senha>@<host>:<porta>/<nome_do_banco>
-   JWT_SECRET=seuSegredoJWT
    ```
 
    - Substitua `<usuário>`, `<senha>`, `<host>`, `<porta>`, e `<nome_do_banco>` com as informações do seu banco de dados PostgreSQL.
